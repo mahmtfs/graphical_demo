@@ -1,12 +1,16 @@
 #include <iostream>
-#include <rapidxml.hpp>
-#include <rapidxml_utils.hpp>
+#include "../includes/config/projectconfig/projectconfig.h"
+#include "../includes/entities/project/project.h"
+
 
 int main() {
-	rapidxml::file<> xmlFile("./config/project.xml");
-	rapidxml::xml_document<> doc;
-	doc.parse<0>(xmlFile.data());
-	std::cout << "Name of my first node is: " << doc.first_node()->name() << "\n";
-	std::cout << "first attr: " << doc.first_node()->first_node()->value();
+	ProjectConfig pcfg("C:/Portfolio/projects/graphicalDemo/demo/config/project.xml");
+	Project p(&pcfg);
+	std::cout << "Old name:\n";
+	std::cout << p.getName() << "\n";
+	p.rename("oldName");
+	std::cout << "New name:\n";
+	std::cout << p.getName() << "\n";
 	return 0;
 }
+
